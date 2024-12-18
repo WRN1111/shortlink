@@ -2,6 +2,7 @@ package org.wrn.shortlink.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.wrn.shortlink.admin.dao.entity.UserDO;
+import org.wrn.shortlink.admin.dto.req.UserRegisterReqDTO;
 import org.wrn.shortlink.admin.dto.resp.UserRespDTO;
 
 /**
@@ -16,4 +17,13 @@ public interface UserService extends IService<UserDO> {
      * @return 用户返回实体
      */
     UserRespDTO getUserByUsername(String username);
+
+    /**
+     *
+     * @param username 用户名
+     * @return 存在返回true 不存在返回false
+     */
+    Boolean hasUsername(String username);
+
+    void register(UserRegisterReqDTO requestParam);
 }
