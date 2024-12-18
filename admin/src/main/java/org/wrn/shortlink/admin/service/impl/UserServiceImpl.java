@@ -1,6 +1,5 @@
 package org.wrn.shortlink.admin.service.impl;
 
-import cn.hutool.db.sql.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -10,7 +9,7 @@ import org.wrn.shortlink.admin.common.convention.exception.ClientException;
 import org.wrn.shortlink.admin.common.enums.UserErrorCodeEnum;
 import org.wrn.shortlink.admin.dao.entity.UserDO;
 import org.wrn.shortlink.admin.dao.mapper.UserMapper;
-import org.wrn.shortlink.admin.dto.UserRespDTO;
+import org.wrn.shortlink.admin.dto.resp.UserRespDTO;
 import org.wrn.shortlink.admin.service.UserService;
 
 /**

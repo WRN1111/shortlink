@@ -2,7 +2,7 @@ package org.wrn.shortlink.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.wrn.shortlink.admin.dao.entity.UserDO;
-import org.wrn.shortlink.admin.dto.UserRespDTO;
+import org.wrn.shortlink.admin.dto.resp.UserRespDTO;
 
 /**
  * 用户接口层
