@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.wrn.shortlink.admin.common.database.BaseDO;
 
 import java.util.Date;
 
@@ -16,7 +17,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GroupDO {
+public class GroupDO extends BaseDO {
 
     /**
      * id
@@ -37,4 +38,8 @@ public class GroupDO {
      * 创建分组用户名
      */
     private String username;
+    /**
+     * 分组排序
+     */
+    private Integer sortOrder;
 }
