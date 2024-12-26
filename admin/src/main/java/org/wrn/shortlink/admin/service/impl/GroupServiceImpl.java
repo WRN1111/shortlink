@@ -10,6 +10,7 @@ import org.wrn.shortlink.admin.common.biz.user.UserContext;
 import org.wrn.shortlink.admin.common.database.BaseDO;
 import org.wrn.shortlink.admin.dao.entity.GroupDO;
 import org.wrn.shortlink.admin.dao.mapper.GroupMapper;
+import org.wrn.shortlink.admin.dto.req.ShortLinkGroupUpdateReqDTO;
 import org.wrn.shortlink.admin.dto.resp.ShortLinkGroupRespDTO;
 import org.wrn.shortlink.admin.service.GroupService;
 import org.wrn.shortlink.admin.tookit.RandomGenerator;
@@ -44,6 +45,17 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
 
         List<GroupDO> selectList = baseMapper.selectList(queryWrapper);
         return BeanUtil.copyToList(selectList, ShortLinkGroupRespDTO.class);
+    }
+
+    @Override
+    public void updateGroup(ShortLinkGroupUpdateReqDTO requestParam) {
+        LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
+                .eq(GroupDO::getGid, requestParam.getGid())
+                .eq(GroupDO::getUsername, UserContext.getUsername())
+                .eq(GroupDO::getDelFlag, 0);
+        GroupDO groupDO = new GroupDO();
+        groupDO.setName(requestParam.getName());
+        baseMapper.update(groupDO, queryWrapper);
     }
 
     private boolean hasGid(String gid) {
