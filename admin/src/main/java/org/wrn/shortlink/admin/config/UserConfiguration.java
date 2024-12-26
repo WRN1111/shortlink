@@ -8,7 +8,7 @@ import org.wrn.shortlink.admin.common.biz.user.UserTransmitFilter;
 
 /**
  * @author: Admin
- * @Desc:
+ * @Desc: 用户配置自动装配
  * @create: 2024-12-25 22:38
  **/
 @Configuration
