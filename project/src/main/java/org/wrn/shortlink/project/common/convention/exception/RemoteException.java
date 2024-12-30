@@ -1,5 +1,8 @@
 package org.wrn.shortlink.project.common.convention.exception;
 
+import org.wrn.shortlink.project.common.convention.errorcode.BaseErrorCode;
+import org.wrn.shortlink.project.common.convention.errorcode.IErrorCode;
+
 /**
  * 远程服务调用异常
  */
