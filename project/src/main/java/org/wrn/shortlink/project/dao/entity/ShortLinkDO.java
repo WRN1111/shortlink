@@ -1,14 +1,20 @@
 package org.wrn.shortlink.project.dao.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import lombok.*;
 import org.wrn.shortlink.project.common.database.BaseDO;
+
+import java.util.Date;
 
 /**
  * 短链接实体
  */
 @Data
+@Builder
 @TableName("t_link")
+@NoArgsConstructor
+@AllArgsConstructor
 public class ShortLinkDO extends BaseDO {
 
     /**
