@@ -2,6 +2,7 @@ package org.wrn.shortlink.admin.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.wrn.shortlink.admin.common.biz.user.UserContext;
 import org.wrn.shortlink.admin.common.database.BaseDO;
 import org.wrn.shortlink.admin.dao.entity.GroupDO;
 import org.wrn.shortlink.admin.dao.mapper.GroupMapper;
+import org.wrn.shortlink.admin.dto.req.ShortLinkGroupSortReqDTO;
 import org.wrn.shortlink.admin.dto.req.ShortLinkGroupUpdateReqDTO;
 import org.wrn.shortlink.admin.dto.resp.ShortLinkGroupRespDTO;
 import org.wrn.shortlink.admin.service.GroupService;
@@ -55,7 +57,7 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
                 .eq(GroupDO::getUsername, UserContext.getUsername());
         GroupDO groupDO = new GroupDO();
         groupDO.setDelFlag(1);
-        baseMapper.update(groupDO,queryWrapper);
+        baseMapper.update(groupDO, queryWrapper);
     }
 
     @Override
@@ -76,5 +78,19 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         GroupDO hasGroupFlag = baseMapper.selectOne(queryWrapper);
         return hasGroupFlag == null;
 
+    }
+
+    @Override
+    public void sortGroup(List<ShortLinkGroupSortReqDTO> requestParam) {
+        requestParam.forEach(each -> {
+            GroupDO groupDO = GroupDO.builder()
+                    .sortOrder(each.getSortOrder())
+                    .build();
+            LambdaUpdateWrapper<GroupDO> eq = Wrappers.lambdaUpdate(GroupDO.class)
+                    .eq(GroupDO::getGid, each.getGid())
+                    .eq(GroupDO::getUsername, UserContext.getUsername())
+                    .eq(GroupDO::getDelFlag, 0);
+            baseMapper.update(groupDO, eq);
+        });
     }
 }
