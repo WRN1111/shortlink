@@ -2,7 +2,10 @@ package org.wrn.shortlink.project.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.wrn.shortlink.project.common.database.BaseDO;
 
 import java.util.Date;
@@ -77,4 +80,8 @@ public class ShortLinkDO extends BaseDO {
      */
     @TableField("`describe`")
     private String describe;
+    /**
+     * 网站标识
+     */
+    private String favicon;
 }

@@ -25,7 +25,7 @@ import static org.wrn.shortlink.admin.common.enums.UserErrorCodeEnum.USER_TOKEN_
 public class UserTransmitFilter implements Filter {
     private static final List<String> IGNORE_URI = Lists.newArrayList(
             "/api/short-link/admin/v1/user/login",
-            "/api/short-link/admin/admin/v1/actual/user/has-username"
+            "/api/short-link/admin/v1/user/has-username"
     );
     private final StringRedisTemplate stringRedisTemplate;
 
