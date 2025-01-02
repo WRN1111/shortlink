@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.wrn.shortlink.admin.common.convention.result.Result;
-import org.wrn.shortlink.admin.remote.dto.ShortLinkRemoteService;
+import org.wrn.shortlink.admin.remote.ShortLinkRemoteService;
 import org.wrn.shortlink.admin.remote.dto.req.ShortLinkCreateReqDTO;
 import org.wrn.shortlink.admin.remote.dto.req.ShortLinkPageReqDTO;
 import org.wrn.shortlink.admin.remote.dto.resp.ShortLinkCreateRespDTO;

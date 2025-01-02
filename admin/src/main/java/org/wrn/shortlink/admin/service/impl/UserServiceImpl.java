@@ -25,6 +25,7 @@ import org.wrn.shortlink.admin.dto.req.UserRegisterReqDTO;
 import org.wrn.shortlink.admin.dto.req.UserUpdateReqDTO;
 import org.wrn.shortlink.admin.dto.resp.UserLoginRespDTO;
 import org.wrn.shortlink.admin.dto.resp.UserRespDTO;
+import org.wrn.shortlink.admin.service.GroupService;
 import org.wrn.shortlink.admin.service.UserService;
 
 import java.util.concurrent.TimeUnit;
@@ -41,7 +42,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     private final RBloomFilter<String> rBloomFilter;
     private final RedissonClient redissonClient;
     private final StringRedisTemplate stringRedisTemplate;
-
+    private final GroupService groupService;
     @Override
     public UserRespDTO getUserByUsername(String username) {
         LambdaQueryWrapper<UserDO> queryWrapper = Wrappers.lambdaQuery(UserDO.class)
@@ -50,7 +51,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         if (userDO == null) {
             throw new ClientException(UserErrorCodeEnum.USER_NULL);
         }
-
         UserRespDTO result = new UserRespDTO();
         BeanUtils.copyProperties(userDO, result);
         return result;
@@ -75,6 +75,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
                     throw new ClientException(UserErrorCodeEnum.USER_SAVE_ERROR);
                 }
                 rBloomFilter.add(requestParam.getUsername());
+                groupService.saveGroup(requestParam.getUsername(),"默认分组");
                 return;
             }
             throw new ClientException(UserErrorCodeEnum.USER_NAME_EXIST);

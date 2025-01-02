@@ -39,4 +39,11 @@ public interface GroupService extends IService<GroupDO> {
      * @param requestParam 短链接分组排序参数
      */
     void sortGroup(List<ShortLinkGroupSortReqDTO> requestParam);
+    /**
+     * 新增短链接分组
+     *
+     * @param username  用户名
+     * @param groupName 短链接分组名
+     */
+    void saveGroup(String username, String groupName);
 }
