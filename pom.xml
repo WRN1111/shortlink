@@ -29,6 +29,7 @@
         <module>gateway</module>
     </modules>
     <properties>
+        <jsoup.version>1.15.3</jsoup.version>
         <java.version>17</java.version>
         <spring-boot.version>3.0.7</spring-boot.version>
         <spring-cloud.version>2022.0.3</spring-cloud.version>
