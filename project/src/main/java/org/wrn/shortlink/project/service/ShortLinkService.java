@@ -2,9 +2,12 @@ package org.wrn.shortlink.project.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import org.wrn.shortlink.project.dao.entity.ShortLinkDO;
 import org.wrn.shortlink.project.dto.req.ShortLinkCreateReqDTO;
 import org.wrn.shortlink.project.dto.req.ShortLinkPageReqDTO;
+import org.wrn.shortlink.project.dto.req.ShortLinkUpdateReqDTO;
 import org.wrn.shortlink.project.dto.resp.ShortLinkCreateRespDTO;
 import org.wrn.shortlink.project.dto.resp.ShortLinkGroupCountQueryRespDTO;
 import org.wrn.shortlink.project.dto.resp.ShortLinkPageRespDTO;
@@ -37,4 +40,18 @@ public interface ShortLinkService extends IService<ShortLinkDO> {
      * @return 查询短链接分组内数量响应
      */
     List<ShortLinkGroupCountQueryRespDTO> listGroupShortLinkCount(List<String> requestParam);
+    /**
+     * 修改短链接
+     *
+     * @param requestParam 修改短链接请求参数
+     */
+    void updateShortLink(ShortLinkUpdateReqDTO requestParam);
+    /**
+     * 短链接跳转
+     *
+     * @param shortUri 短链接后缀
+     * @param request  HTTP 请求
+     * @param response HTTP 响应
+     */
+    void restoreUrl(String shortUri, ServletRequest request, ServletResponse response);
 }
