@@ -10,6 +10,7 @@ import org.wrn.shortlink.project.common.convention.result.Result;
 import org.wrn.shortlink.project.common.convention.result.Results;
 import org.wrn.shortlink.project.dto.req.RecycleBinSaveReqDTO;
 import org.wrn.shortlink.project.dto.req.ShortLinkPageReqDTO;
+import org.wrn.shortlink.project.dto.req.ShortLinkRecycleBinPageReqDTO;
 import org.wrn.shortlink.project.dto.resp.ShortLinkPageRespDTO;
 import org.wrn.shortlink.project.service.RecycleBinService;
 
@@ -34,7 +35,7 @@ public class RecycleBinController {
      * 分页查询回收站短链接
      */
     @GetMapping("/api/short-link/v1/recycle-bin/page")
-    public Result<IPage<ShortLinkPageRespDTO>> pageShortLink(ShortLinkPageReqDTO requestParam) {
+    public Result<IPage<ShortLinkPageRespDTO>> pageShortLink(ShortLinkRecycleBinPageReqDTO requestParam) {
         return Results.success(recycleBinService.pageShortLink(requestParam));
     }
 }
