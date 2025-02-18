@@ -1,6 +1,7 @@
 package org.wrn.shortlink.project.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.wrn.shortlink.project.dao.entity.LinkAccessLogsDO;
 import org.wrn.shortlink.project.dto.req.ShortLinkStatsReqDTO;
