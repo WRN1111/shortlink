@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.wrn.shortlink.admin.common.convention.result.Result;
 import org.wrn.shortlink.admin.dto.req.*;
+import org.wrn.shortlink.admin.dto.resp.ShortLinkBatchCreateRespDTO;
 import org.wrn.shortlink.admin.remote.dto.req.ShortLinkCreateReqDTO;
 import org.wrn.shortlink.admin.remote.dto.req.ShortLinkPageReqDTO;
 import org.wrn.shortlink.admin.remote.dto.resp.ShortLinkCreateRespDTO;
@@ -166,6 +167,18 @@ public interface ShortLinkRemoteService {
         stringObjectMap.remove("orders");
         stringObjectMap.remove("records");
         String resultBodyStr = HttpUtil.get("http://127.0.0.1:8001/api/short-link/v1/stats/access-record/group", stringObjectMap);
+        return JSON.parseObject(resultBodyStr, new TypeReference<>() {
+        });
+    }
+
+    /**
+     * 批量创建短链接
+     *
+     * @param requestParam 批量创建短链接请求参数
+     * @return 短链接批量创建响应
+     */
+    default Result<ShortLinkBatchCreateRespDTO> batchCreateShortLink(ShortLinkBatchCreateReqDTO requestParam) {
+        String resultBodyStr = HttpUtil.post("http://127.0.0.1:8001/api/short-link/v1/create/batch", JSON.toJSONString(requestParam));
         return JSON.parseObject(resultBodyStr, new TypeReference<>() {
         });
     }
