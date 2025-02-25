@@ -11,7 +11,10 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.wrn.shortlink.project.dao.entity.ShortLinkDO;
 import org.wrn.shortlink.project.dao.mapper.ShortLinkMapper;
-import org.wrn.shortlink.project.dto.req.*;
+import org.wrn.shortlink.project.dto.req.RecycleBinRecoverReqDTO;
+import org.wrn.shortlink.project.dto.req.RecycleBinRemoveReqDTO;
+import org.wrn.shortlink.project.dto.req.RecycleBinSaveReqDTO;
+import org.wrn.shortlink.project.dto.req.ShortLinkRecycleBinPageReqDTO;
 import org.wrn.shortlink.project.dto.resp.ShortLinkPageRespDTO;
 import org.wrn.shortlink.project.service.RecycleBinService;
 
@@ -76,7 +79,12 @@ public class RecycleBinServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLin
                 .eq(ShortLinkDO::getFullShortUrl, requestParam.getFullShortUrl())
                 .eq(ShortLinkDO::getGid, requestParam.getGid())
                 .eq(ShortLinkDO::getEnableStatus, 1)
+                .eq(ShortLinkDO::getDelTime, 0L)
                 .eq(ShortLinkDO::getDelFlag, 0);
-        baseMapper.delete(updateWrapper);
+        ShortLinkDO delShortLinkDO = ShortLinkDO.builder()
+                .delTime(System.currentTimeMillis())
+                .build();
+        delShortLinkDO.setDelFlag(1);
+        baseMapper.update(delShortLinkDO, updateWrapper);
     }
 }
