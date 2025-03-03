@@ -33,6 +33,8 @@ import org.wrn.shortlink.admin.service.UserService;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static org.wrn.shortlink.admin.common.constant.RedisCacheConstant.USER_LOGIN_KEY;
+
 /**
  * @author: Admin
  * @Desc:
@@ -108,7 +110,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         if (userDO == null) {
             throw new ClientException("用户不存在");
         }
-        Map<Object, Object> hasLoginMap = stringRedisTemplate.opsForHash().entries("login_" + requestParam.getUsername());
+        Map<Object, Object> hasLoginMap = stringRedisTemplate.opsForHash().entries(USER_LOGIN_KEY + requestParam.getUsername());
         if (CollUtil.isNotEmpty(hasLoginMap)) {
             String token = hasLoginMap.keySet().stream()
                     .findFirst()
