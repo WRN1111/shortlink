@@ -17,6 +17,10 @@ spring:
     redis:
       host: 10.21.160.28
       port: 6379
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.21.160.28:8848
 short-link:
   domain:
     default: nurl.ink:8001
