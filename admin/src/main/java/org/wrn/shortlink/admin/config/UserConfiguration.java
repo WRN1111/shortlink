@@ -19,12 +19,12 @@ public class UserConfiguration {
      * 用户信息传递过滤器
      */
     @Bean
-    public FilterRegistrationBean<UserTransmitFilter> UserTransmitFilter(StringRedisTemplate redisTemplate) {
-        FilterRegistrationBean<UserTransmitFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new UserTransmitFilter(redisTemplate));
-        registrationBean.addUrlPatterns("/*");
-        registrationBean.setOrder(0);
-        return registrationBean;
+    public FilterRegistrationBean<UserTransmitFilter> globalUserTransmitFilter() {
+        FilterRegistrationBean<UserTransmitFilter> registration = new FilterRegistrationBean<>();
+        registration.setFilter(new UserTransmitFilter());
+        registration.addUrlPatterns("/*");
+        registration.setOrder(0);
+        return registration;
     }
 
     /**
