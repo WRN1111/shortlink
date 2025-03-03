@@ -5,10 +5,12 @@ spring:
 
     driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
     url: jdbc:shardingsphere:classpath:shardingsphere-config-${database.env:dev}.yaml
-
   data:
     redis:
       host: 10.21.160.28
       port: 6379
 server:
   port: 8002
+short-link:
+  group:
+    max-num: 20
