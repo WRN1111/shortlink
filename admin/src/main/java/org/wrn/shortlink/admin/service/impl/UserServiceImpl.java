@@ -18,6 +18,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.wrn.shortlink.admin.common.constant.RedisCacheConstant;
 import org.wrn.shortlink.admin.common.convention.exception.ClientException;
+import org.wrn.shortlink.admin.common.convention.exception.ServiceException;
 import org.wrn.shortlink.admin.common.enums.UserErrorCodeEnum;
 import org.wrn.shortlink.admin.dao.entity.UserDO;
 import org.wrn.shortlink.admin.dao.mapper.UserMapper;
@@ -52,7 +53,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
                 .eq(UserDO::getUsername, username);
         UserDO userDO = baseMapper.selectOne(queryWrapper);
         if (userDO == null) {
-            throw new ClientException(UserErrorCodeEnum.USER_NULL);
+            throw new ServiceException(UserErrorCodeEnum.USER_NULL);
         }
         UserRespDTO result = new UserRespDTO();
         BeanUtils.copyProperties(userDO, result);
