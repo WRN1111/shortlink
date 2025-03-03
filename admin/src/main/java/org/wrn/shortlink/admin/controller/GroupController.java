@@ -50,7 +50,7 @@ public class GroupController {
     }
 
     /**
-     * 删除短链接分组
+     * 排序短链接分组
      */
     @PostMapping("/api/short-link/admin/v1/group/sort")
     public Result<Void> sortGroup(@RequestBody List<ShortLinkGroupSortReqDTO> requestParam) {
