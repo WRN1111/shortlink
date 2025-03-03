@@ -19,8 +19,9 @@ import org.wrn.shortlink.admin.service.RecycleBinService;
 /**
  * 回收站管理控制层
  */
-@RestController
+
 @RequiredArgsConstructor
+@RestController(value = "recycleBinControllerByAdmin")
 public class RecycleBinController {
 
     private final ShortLinkActualRemoteService shortLinkActualRemoteService;

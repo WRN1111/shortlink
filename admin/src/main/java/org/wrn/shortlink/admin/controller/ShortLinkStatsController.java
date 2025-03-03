@@ -11,7 +11,7 @@ import org.wrn.shortlink.admin.remote.ShortLinkActualRemoteService;
 /**
  * 短链接监控控制层
  */
-@RestController
+@RestController(value = "shortLinkStatsControllerByAdmin")
 @RequiredArgsConstructor
 public class ShortLinkStatsController {
 

@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -26,6 +27,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestControllerAdvice
+@Component("globalExceptionHandlerByAdmin")
 public class GlobalExceptionHandler {
 
     /**

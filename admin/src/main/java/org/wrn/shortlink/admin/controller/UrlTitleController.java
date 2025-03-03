@@ -10,7 +10,7 @@ import org.wrn.shortlink.admin.remote.ShortLinkActualRemoteService;
 /**
  * URL 标题控制层
  */
-@RestController
+@RestController(value = "urlTitleControllerByAdmin")
 @RequiredArgsConstructor
 public class UrlTitleController {
 

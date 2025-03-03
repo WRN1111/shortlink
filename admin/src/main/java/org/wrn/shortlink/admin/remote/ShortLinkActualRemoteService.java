@@ -16,7 +16,7 @@ import org.wrn.shortlink.admin.remote.dto.resp.ShortLinkPageRespDTO;
 
 import java.util.List;
 
-@FeignClient("short-link-project")
+@FeignClient(value = "short-link-project", url = "${aggregation.remote-url:}")
 public interface ShortLinkActualRemoteService {
     /**
      * 创建短链接
