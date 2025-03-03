@@ -1,9 +1,11 @@
 package org.wrn.shortlink.admin.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.wrn.shortlink.admin.common.biz.user.UserFlowRiskControlFilter;
 import org.wrn.shortlink.admin.common.biz.user.UserTransmitFilter;
 
 /**
@@ -23,5 +25,20 @@ public class UserConfiguration {
         registrationBean.addUrlPatterns("/*");
         registrationBean.setOrder(0);
         return registrationBean;
+    }
+
+    /**
+     * 用户操作流量风控过滤器
+     */
+    @Bean
+    @ConditionalOnProperty(name = "short-link.flow-limit.enable", havingValue = "true")
+    public FilterRegistrationBean<UserFlowRiskControlFilter> globalUserFlowRiskControlFilter(
+            StringRedisTemplate stringRedisTemplate,
+            UserFlowRiskControlConfiguration userFlowRiskControlConfiguration) {
+        FilterRegistrationBean<UserFlowRiskControlFilter> registration = new FilterRegistrationBean<>();
+        registration.setFilter(new UserFlowRiskControlFilter(stringRedisTemplate, userFlowRiskControlConfiguration));
+        registration.addUrlPatterns("/*");
+        registration.setOrder(10);
+        return registration;
     }
 }
