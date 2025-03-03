@@ -16,6 +16,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.wrn.shortlink.admin.common.biz.user.UserContext;
 import org.wrn.shortlink.admin.common.constant.RedisCacheConstant;
 import org.wrn.shortlink.admin.common.convention.exception.ClientException;
 import org.wrn.shortlink.admin.common.convention.exception.ServiceException;
@@ -31,6 +32,7 @@ import org.wrn.shortlink.admin.service.GroupService;
 import org.wrn.shortlink.admin.service.UserService;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static org.wrn.shortlink.admin.common.constant.RedisCacheConstant.USER_LOGIN_KEY;
@@ -94,6 +96,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 
     @Override
     public void update(UserUpdateReqDTO requestParam) {
+        if (!Objects.equals(requestParam.getUsername(), UserContext.getUsername())) {
+            throw new ClientException("当前登录用户修改请求异常");
+        }
         LambdaUpdateWrapper<UserDO> updateWrapper = Wrappers.lambdaUpdate(UserDO.class)
                 .eq(UserDO::getUsername, requestParam.getUsername());
         baseMapper.update(BeanUtil.toBean(requestParam, UserDO.class), updateWrapper);
